@@ -7,9 +7,10 @@ export const Game = styled.div`
   padding-left: 1em;
   margin: 1em 0;
   height: 15%;
+  overflow-wrap: break-word;
 
   p {
-    margin: 0.2em;
+    margin: 0.4em;
     font-weight: bold;
   }
 
