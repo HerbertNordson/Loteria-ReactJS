@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import GameBet from "./components/page/gameBet/GameBet";
+// import RecentGame from "./components/page/recent/RecentGame";
+// import Home from "./components/page/home/Home";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GameBet />
+      <footer>Copyright 2020 Luby Software</footer>
     </div>
   );
-}
+};
 
 export default App;
