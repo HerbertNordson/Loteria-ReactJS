@@ -4,6 +4,7 @@ import { ButtonType } from "./styled";
 type params = {
   name: string;
   color: string;
+  key: number;
 };
 
 const ButtonFilter = (props: params) => {

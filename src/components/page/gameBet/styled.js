@@ -16,7 +16,7 @@ export const TypesContent = styled.main`
   .Cart div > div {
     text-transform: uppercase;
     font-style: italic;
-    padding: 0.5em;
+    margin: 1em;
   }
 
   .Cart button {
@@ -66,5 +66,10 @@ export const TypesCenter = styled.section`
   @media (max-width: 780px) {
     width: auto;
     padding: 2em 0;
+
+    & .number {
+      margin: 0.2em;
+      margin-bottom: 0.5em;
+    }
   }
 `;
