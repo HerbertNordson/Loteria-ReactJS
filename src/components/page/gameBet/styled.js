@@ -61,6 +61,7 @@ export const TypesCenter = styled.section`
     border: none;
     border-radius: 1.5rem;
     outline: none;
+    cursor: pointer;
   }
 
   @media (max-width: 780px) {

@@ -13,10 +13,11 @@ interface ContextProviderProps {
   children: ReactNode;
 }
 
-export const context = createContext<TypeGames[]>([]);
+export const Context = createContext<TypeGames[]>([]);
 
 export function ContextProvider(props: ContextProviderProps) {
   const [data, setData] = useState<TypeGames[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     fetch("./games.json", {
@@ -28,5 +29,5 @@ export function ContextProvider(props: ContextProviderProps) {
       .then((response) => setData(response.types));
   }, []);
 
-  return <context.Provider value={data}>{props.children}</context.Provider>;
+  return <Context.Provider value={data}>{props.children}</Context.Provider>;
 }
