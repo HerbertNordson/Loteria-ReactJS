@@ -1,13 +1,21 @@
 import { Game } from "./styled";
 
-const CompleteGame = () => {
+const CompleteGame = (props: any) => {
+  const { id, type, data, price, game, color } = props;
+
   return (
-    <Game>
-      <p>01,02,03,04,05,06,05,09,08,09,08,07,08,25,52</p>
+    <Game key={id} id={id} color={color}>
+      <p>{game}</p>
       <p>
-        <span>30/11/2020</span> - <span>(R$ 2,50)</span>
+        <span>{data}</span> -
+        <span>
+          {price.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </span>
       </p>
-      <p>Lorofácil</p>
+      <p>{type}</p>
     </Game>
   );
 };

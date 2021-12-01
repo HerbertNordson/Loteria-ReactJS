@@ -6,6 +6,8 @@ export const TypesContent = styled.main`
   width: 90%;
   min-height: 80vh;
   margin: auto;
+  text-transform: uppercase;
+  font-style: italic;
 
   .Cart {
     width: 30%;
@@ -48,6 +50,13 @@ export const TypesCenter = styled.section`
 
   & > p {
     margin: 1em 0;
+    text-transform: initial;
+    font-weight: bold;
+  }
+
+  & > p > span {
+    display: block;
+    font-weight: normal;
   }
 
   & .number {

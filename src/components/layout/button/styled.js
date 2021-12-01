@@ -14,7 +14,8 @@ export const ButtonType = styled.button`
   cursor: pointer;
 
   &:hover,
-  &:active {
+  &:active,
+  & > isContected {
     background: ${(props) => props.color};
     color: #fff;
   }

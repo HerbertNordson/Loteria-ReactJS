@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Game = styled.div`
   flex-direction: column;
   justify-content: center;
-  border-left: 0.4em solid;
+  border-left: 0.4em solid ${(props) => props.color};
   padding-left: 1em;
   margin: 1em 0;
   height: 15%;

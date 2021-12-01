@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 
 interface TypeGames {
   type: string;
@@ -9,13 +9,17 @@ interface TypeGames {
   color: string;
 }
 
-interface ContextProviderProps {
-  children: ReactNode;
-}
+export const Context = React.createContext<{
+  games: TypeGames[];
+  isLoggedIn: boolean;
+  setIsLoggedIn: (value: boolean) => void;
+}>({
+  games: [],
+  isLoggedIn: false,
+  setIsLoggedIn: (value: boolean) => {},
+});
 
-export const Context = createContext<TypeGames[]>([]);
-
-export function ContextProvider(props: ContextProviderProps) {
+export const ContextProvider: React.FC<{}> = (props) => {
   const [data, setData] = useState<TypeGames[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -29,5 +33,13 @@ export function ContextProvider(props: ContextProviderProps) {
       .then((response) => setData(response.types));
   }, []);
 
-  return <Context.Provider value={data}>{props.children}</Context.Provider>;
-}
+  const contextValues = {
+    games: data,
+    isLoggedIn: isLoggedIn,
+    setIsLoggedIn: setIsLoggedIn,
+  };
+
+  return (
+    <Context.Provider value={contextValues}>{props.children}</Context.Provider>
+  );
+};

@@ -1,13 +1,34 @@
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import gameBet, { betActions } from "../../../store/gameBet";
+import { authActions } from "../../../store/auth";
 import { Act } from "./styled";
 
-const ButtonsAct = () => {
+interface IPropsACT {
+  onClean: () => void;
+  onAdd: () => void;
+}
+
+const ButtonsAct: React.FC<IPropsACT> = (props) => {
+  const dispatch = useDispatch();
+
+  function onHandlerClean() {
+    props.onClean();
+  }
+
+  const itemHandleCart = () => {
+    dispatch(betActions.toggle());
+    props.onAdd();
+  };
+
   return (
     <Act>
       <div>
         <button>Complete game</button>
-        <button>Clear game</button>
+        <button onClick={onHandlerClean}>Clear game</button>
       </div>
-      <button className="add">Add to cart</button>
+      <button className="add" onClick={itemHandleCart}>
+        Add to cart
+      </button>
     </Act>
   );
 };

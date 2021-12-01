@@ -1,46 +1,45 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import ButtonFilter from "../../layout/button/buttonFitler";
 import ButtonsAct from "../../layout/buttonAct/buttonAct";
 import { Card } from "../../layout/card/styled";
 import CompleteGame from "../../layout/game/CompleteGame";
 import Header from "../../layout/header/Header";
 import { TypesCenter, TypesContent } from "./styled";
-import { context } from "../../utils/context";
+import { Context } from "../../utils/context";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActcion } from "../../../store/cart";
 
-interface GameBetProps {
-  name?: string;
-  number?: number;
-}
+const GameBet: React.FC<{}> = (props) => {
+  const ctxData = useContext(Context);
 
-interface ContentType {
-  type: string;
-  description: string;
-  range: number;
-  price: number;
-  "max-number": number;
-  color: string;
-}
-
-const GameBet = (props: GameBetProps) => {
-  const [type, setType] = useState<String>("Lotofácil");
+  const [type, setType] = useState<string | null>("Lotofácil");
   const [description, setDescription] = useState<String>("");
-  const [range, setRange] = useState<Number>(0);
-  const [price, setPrice] = useState<Number>(0);
-  const [maxNumber, setMaxNumber] = useState<Number>();
-  const [color, setColor] = useState<String>("");
-  const buttonArray = [];
+  const [range, setRange] = useState<number>(0);
+  const [price, setPrice] = useState<number>(0);
+  const [maxNumber, setMaxNumber] = useState<number>(0);
+  const [color, setColor] = useState<string>("");
+  const [count, setCount] = useState<number>(1);
+  const [game, setGame] = useState<number[]>([]);
 
-  const ctxData = useContext(context);
+  const dispatch = useDispatch();
+  const toggleItem = useSelector((state: any) => state.gameBet.itemCart);
+  const cartItems = useSelector((state: any) => state.cart.items);
+
+  const buttonArray: any = [];
+  let finalPrice: number = 0;
+  const data = new Date();
+  const date = data.getDay() + "/" + data.getMonth() + "/" + data.getFullYear();
 
   useEffect(() => {
-    ctxData.map((content: ContentType) => {
+    ctxData.games.map((content) => {
       if (content.type === type) {
         return ContentTypesHandler(content);
       }
+      return null;
     });
-  }, [ContentTypesHandler]);
+  }, [ctxData.games, ContentTypesHandler, type]);
 
-  function ContentTypesHandler(props: ContentType) {
+  function ContentTypesHandler(props: any) {
     setType(props.type);
     setDescription(props.description);
     setRange(props.range);
@@ -49,13 +48,61 @@ const GameBet = (props: GameBetProps) => {
     setColor(props.color);
   }
 
+  function onButtonClickHandler(ev: React.MouseEvent) {
+    ev.preventDefault();
+    if (count > maxNumber) {
+      return alert("Quantidade máxima de números atingida!");
+    }
+    if (ev.currentTarget.classList.contains("ativo")) {
+      ev.currentTarget.removeAttribute("style");
+      ev.currentTarget.classList.remove("ativo");
+      setCount(count - 1);
+    } else {
+      ev.currentTarget.classList.add("ativo");
+      ev.currentTarget.setAttribute("style", `background: ${color}`);
+      setCount(count + 1);
+    }
+  }
+
   for (let i = 1; i <= range; i++) {
     buttonArray.push(
-      <button className="number">{i < 10 ? `0${i}` : i}</button>
+      <button
+        className="number"
+        onClick={onButtonClickHandler}
+        value={i}
+        key={i}
+      >
+        {i < 10 ? `0${i}` : i}
+      </button>
     );
   }
 
-  let priceFinal: any = 0;
+  function cleanGame(): void {
+    setCount(1);
+    setRange(0);
+  }
+
+  function onHandlerClick(props: string | null) {
+    cleanGame();
+    setType(props);
+  }
+
+  const id = (Math.random() * 10).toFixed(2);
+
+  const addToCartHandler = () => {
+    dispatch(
+      cartActcion.addItemToCart({
+        game,
+        price,
+        type,
+        date,
+        color,
+        id,
+      })
+    );
+
+    console.log(cartItems);
+  };
 
   return (
     <Fragment>
@@ -64,34 +111,45 @@ const GameBet = (props: GameBetProps) => {
         <TypesCenter>
           <h2>New bet for {type}</h2>
           <p>Choose a game</p>
-          {ctxData.map((types, key) => {
-            return (
-              <ButtonFilter key={key} name={types.type} color={types.color} />
-            );
-          })}
+
+          <ButtonFilter name={type} onContent={onHandlerClick} />
+
           <p>
-            Fill your bet{" "}
-            <span>
-              Mark as many numbers as you want up to a maximum of 50. Win by
-              hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
-            </span>
+            Fill your bet
+            <span>{description}</span>
           </p>
 
           {buttonArray}
 
-          <ButtonsAct />
+          <ButtonsAct onClean={cleanGame} onAdd={addToCartHandler} />
         </TypesCenter>
         <div className="Cart">
           <Card>
             <h3>Cart</h3>
-            <CompleteGame />
+            {toggleItem &&
+              cartItems.map(
+                (item: any) => (
+                  (finalPrice = finalPrice + item.totalPrice),
+                  (
+                    <CompleteGame
+                      id={id}
+                      type={item.itemType}
+                      data={date}
+                      price={item.itemPrice}
+                      game={game}
+                      color={item.itemColor}
+                    />
+                  )
+                )
+              )}
+            {!toggleItem && <p>Seu carrinho está vazio!!!</p>}
             <h3>
               Cart <span>total: </span>
-              {price > 0
-                ? (priceFinal = price.toLocaleString("pt-BR", {
+              {finalPrice > 0
+                ? finalPrice.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
-                  }))
+                  })
                 : "R$ 0,00"}
             </h3>
             <button>Save</button>
