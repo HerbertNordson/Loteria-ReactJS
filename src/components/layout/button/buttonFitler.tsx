@@ -1,15 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ButtonType } from "./styled";
-import { Context } from "../../utils/context";
 
 interface IProps {
   name: string | null;
   onContent: (props: string | null) => void;
+  data: any[];
 }
 
 const ButtonFilter: React.FC<IProps> = (props) => {
-  const ctxBut = useContext(Context);
-
   function getNameHandler(ev: React.MouseEvent) {
     ev.preventDefault();
     props.onContent(ev.currentTarget.textContent);
@@ -17,7 +15,7 @@ const ButtonFilter: React.FC<IProps> = (props) => {
 
   return (
     <React.Fragment>
-      {ctxBut.games.map((item) => {
+      {props.data.map((item) => {
         return (
           <ButtonType
             color={item.color}

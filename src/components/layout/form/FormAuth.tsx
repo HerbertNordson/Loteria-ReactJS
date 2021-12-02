@@ -1,20 +1,19 @@
-import React, { useState } from "react";
 import { Container } from "./styled";
 
-const Users = [
-  {
-    email: "herbert@admin.com",
-    senha: "admin123",
-  },
-];
+// const Users = [
+//   {
+//     email: "herbert@admin.com",
+//     senha: "admin123",
+//   },
+// ];
 
 interface IPropsForm {
   onLogin: (email: any, password: any) => void;
 }
 
 const FormAuth: React.FC<IPropsForm> = (props) => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState<any>();
+  // const [email, setEmail] = useState();
+  // const [password, setPassword] = useState<any>();
 
   const submitHandler = (event: any) => {
     event.preventDefault();

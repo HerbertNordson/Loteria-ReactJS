@@ -1,6 +1,5 @@
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import gameBet, { betActions } from "../../../store/gameBet";
-import { authActions } from "../../../store/auth";
+import { useDispatch } from "react-redux";
+import { betActions } from "../../../store/gameBet";
 import { Act } from "./styled";
 
 interface IPropsACT {

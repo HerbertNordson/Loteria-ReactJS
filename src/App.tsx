@@ -1,22 +1,31 @@
+import { useEffect, useState } from "react";
 import { RootStateOrAny, useSelector } from "react-redux";
 import "./App.css";
 import GameBet from "./components/page/gameBet/GameBet";
-// import RecentGame from "./components/page/recent/RecentGame";
 import Home from "./components/page/home/Home";
-import { ContextProvider } from "./components/utils/context";
 
 const App = () => {
+  const [data, setData] = useState<any[]>([]);
+
   const Auth = useSelector(
     (state: RootStateOrAny) => state.auth.isAuthenticated
   );
 
+  useEffect(() => {
+    fetch("./games.json", {
+      headers: {
+        Accept: "aplications/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => setData(response.types));
+  }, []);
+
   return (
     <div className="App">
-      <ContextProvider>
-        {!Auth && <Home />}
-        {Auth && <GameBet />}
-        <footer>Copyright 2020 Luby Software</footer>
-      </ContextProvider>
+      {!Auth && <Home />}
+      {Auth && <GameBet data={data} />}
+      <footer>Copyright 2020 Luby Software</footer>
     </div>
   );
 };
