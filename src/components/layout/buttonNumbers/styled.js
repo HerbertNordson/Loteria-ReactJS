@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Number = styled.input`
+export const Number = styled.button`
   padding: 0.5em;
   margin-right: 1em;
   margin-bottom: 1em;

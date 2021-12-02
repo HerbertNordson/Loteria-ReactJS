@@ -11,22 +11,15 @@ const cartSlice = createSlice({
   reducers: {
     addItemToCart(state, action) {
       const newItem = action.payload;
-      const existingItem = state.items.find((item) => item.id === newItem.id);
-      state.totalQuantity++;
-      if (!existingItem) {
-        state.items.push({
-          itemID: newItem.id,
-          itemGame: newItem.game,
-          itemType: newItem.type,
-          itemPrice: newItem.price,
-          itemColor: newItem.color,
-          totalPrice: newItem.price,
-          quantity: 1,
-        });
-      } else {
-        existingItem.quantity++;
-        existingItem.totalPrice = existingItem.totalPrice + newItem.price;
-      }
+      state.items.push({
+        itemID: (Math.random() * 10).toFixed(2),
+        itemGame: newItem.game,
+        itemType: newItem.type,
+        itemPrice: newItem.price,
+        itemColor: newItem.color,
+        totalPrice: newItem.price,
+        quantity: 1,
+      });
     },
     removeItemToCart(state, action) {
       const id = action.payload;

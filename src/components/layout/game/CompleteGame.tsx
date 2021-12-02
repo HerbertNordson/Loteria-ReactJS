@@ -2,11 +2,10 @@ import React from "react";
 import { Game } from "./styled";
 
 const CompleteGame = (props: any) => {
-  const { id, type, data, price, game, color } = props;
-
+  const { type, data, price, game, color } = props;
   return (
     <React.Fragment>
-      <Game key={id} id={id} color={color}>
+      <Game key={(Math.random() * 10).toFixed(2)} color={color}>
         <p>{game}</p>
         <p>
           <span>{data}</span> -

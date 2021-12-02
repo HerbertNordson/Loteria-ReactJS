@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { betActions } from "../../../store/gameBet";
+import { numberActions } from "../../../store/gameNumber";
 import { Act } from "./styled";
 
 interface IPropsACT {
@@ -11,6 +12,7 @@ const ButtonsAct: React.FC<IPropsACT> = (props) => {
   const dispatch = useDispatch();
 
   function onHandlerClean() {
+    dispatch(numberActions.handlerRemoveArrNumbers());
     props.onClean();
   }
 

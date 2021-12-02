@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { numberActions } from "../../../store/gameNumber";
 import { Number } from "./styled";
 
 interface IPropsNumbers {
@@ -11,26 +13,43 @@ interface IPropsNumbers {
 
 const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
   const numberArray: number[] = [];
-  const [btnArray, setBtnArray] = useState([]);
+  const [btnArray, setBtnArray] = useState<number[]>([]);
+  const dispatch = useDispatch();
 
   for (let i = 1; i <= props.number; i++) {
     numberArray.push(i);
   }
 
-  function onButtonClickHandler(ev: React.MouseEvent) {
+  function onButtonClickHandler(ev: any) {
     ev.preventDefault();
-    console.log(btnArray);
     if (props.count > props.maxRange) {
-      return console.log("foi");
+      for (let i = 0; i < btnArray.length; i++) {
+        if (ev.target.value === btnArray[i]) {
+          ev.target.removeAttribute("style");
+          ev.target.classList.remove("ativo");
+          setBtnArray(btnArray.filter((item) => item !== ev.target.value));
+          props.onHandlerCount("REMOVE");
+          return;
+        }
+      }
+      return alert(
+        "Seu jogo está completo! Remova um número para inserir um novo ou adicione sua aposta ao carrinho!"
+      );
     }
-    if (ev.currentTarget.classList.contains("ativo")) {
-      ev.currentTarget.removeAttribute("style");
-      ev.currentTarget.classList.remove("ativo");
+    if (ev.target.classList.contains("ativo")) {
+      ev.target.removeAttribute("style");
+      ev.target.classList.remove("ativo");
+      setBtnArray(btnArray.filter((item) => item !== ev.target.value));
       props.onHandlerCount("REMOVE");
+      return;
     } else {
-      ev.currentTarget.classList.add("ativo");
-      ev.currentTarget.setAttribute("style", `background: ${props.color}`);
+      ev.target.classList.add("ativo");
+      ev.target.setAttribute("style", `background: ${props.color}`);
+      setBtnArray([...btnArray].concat(ev.target.value));
+      const numb = ev.target.value;
+      dispatch(numberActions.handlerArrNumbers(numb));
       props.onHandlerCount("ADD");
+      return;
     }
   }
 

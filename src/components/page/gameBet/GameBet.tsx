@@ -1,13 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
-import ButtonFilter from "../../layout/button/buttonFitler";
-import ButtonsAct from "../../layout/buttonAct/buttonAct";
-import { Card } from "../../layout/card/styled";
-import CompleteGame from "../../layout/game/CompleteGame";
-import Header from "../../layout/header/Header";
-import { TypesCenter, TypesContent } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActcion } from "../../../store/cart";
+
+import ButtonFilter from "../../layout/button/buttonFitler";
+import ButtonsAct from "../../layout/buttonAct/buttonAct";
+import CompleteGame from "../../layout/game/CompleteGame";
+import Header from "../../layout/header/Header";
 import ButtonNumber from "../../layout/buttonNumbers/buttonNumbers";
+
+import { Card } from "../../layout/card/styled";
+import { TypesCenter, TypesContent } from "./styled";
+import { numberActions } from "../../../store/gameNumber";
 
 interface IPropsData {
   data: any[];
@@ -21,16 +24,16 @@ const GameBet: React.FC<IPropsData> = (props) => {
   const [maxNumber, setMaxNumber] = useState<number>(0);
   const [color, setColor] = useState<string>("");
   const [count, setCount] = useState<number>(1);
-  const game: number[] = [];
+  const [game, setGame] = useState<number[]>([]);
 
   const dispatch = useDispatch();
   const toggleItem = useSelector((state: any) => state.gameBet.itemCart);
   const cartItems = useSelector((state: any) => state.cart.items);
+  const numbersGame = useSelector((state: any) => state.number.numberArr);
 
   let finalPrice: number = 0;
   const data = new Date();
   const date = data.getDay() + "/" + data.getMonth() + "/" + data.getFullYear();
-  const id = (Math.random() * 10).toFixed(2);
 
   useEffect(() => {
     props.data.map((content) => {
@@ -51,6 +54,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
   }
 
   function cleanGame(): void {
+    dispatch(numberActions.handlerRemoveArrNumbers());
     setCount(1);
     setRange(0);
   }
@@ -61,6 +65,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
   }
 
   const addToCartHandler = () => {
+    setGame(numbersGame.map((numb: number) => numb));
     dispatch(
       cartActcion.addItemToCart({
         game,
@@ -68,9 +73,10 @@ const GameBet: React.FC<IPropsData> = (props) => {
         type,
         date,
         color,
-        id,
       })
     );
+
+    onHandlerClick(type);
   };
 
   const countHandler = (props: string) => {
@@ -114,21 +120,15 @@ const GameBet: React.FC<IPropsData> = (props) => {
           <Card>
             <h3>Cart</h3>
             {toggleItem &&
-              cartItems.map(
-                (item: any) => (
-                  (finalPrice = finalPrice + item.totalPrice),
-                  (
-                    <CompleteGame
-                      id={id}
-                      type={item.itemType}
-                      data={date}
-                      price={item.itemPrice}
-                      game={game}
-                      color={item.itemColor}
-                    />
-                  )
-                )
-              )}
+              cartItems.map((item: any) => (
+                <CompleteGame
+                  type={item.itemType}
+                  data={date}
+                  price={item.itemPrice}
+                  game={item.itemGame}
+                  color={item.itemColor}
+                />
+              ))}
             {!toggleItem && <p>Seu carrinho está vazio!!!</p>}
             <h3>
               Cart <span>total: </span>
