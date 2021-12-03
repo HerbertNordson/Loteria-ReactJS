@@ -24,12 +24,10 @@ const GameBet: React.FC<IPropsData> = (props) => {
   const [maxNumber, setMaxNumber] = useState<number>(0);
   const [color, setColor] = useState<string>("");
   const [count, setCount] = useState<number>(1);
-  const [game, setGame] = useState<number[]>([]);
-
   const dispatch = useDispatch();
   const toggleItem = useSelector((state: any) => state.gameBet.itemCart);
   const cartItems = useSelector((state: any) => state.cart.items);
-  const numbersGame = useSelector((state: any) => state.number.numberArr);
+  const game = useSelector((state: any) => state.number.numberArr);
 
   let finalPrice: number = 0;
   const data = new Date();
@@ -65,7 +63,11 @@ const GameBet: React.FC<IPropsData> = (props) => {
   }
 
   const addToCartHandler = () => {
-    setGame(numbersGame.map((numb: number) => numb));
+    if (game.length < maxNumber) {
+      return alert(
+        `Faltam ${maxNumber - game.length} números para concluir o seu jogo!`
+      );
+    }
     dispatch(
       cartActcion.addItemToCart({
         game,
@@ -75,7 +77,6 @@ const GameBet: React.FC<IPropsData> = (props) => {
         color,
       })
     );
-
     onHandlerClick(type);
   };
 
@@ -119,16 +120,25 @@ const GameBet: React.FC<IPropsData> = (props) => {
         <div className="Cart">
           <Card>
             <h3>Cart</h3>
-            {toggleItem &&
-              cartItems.map((item: any) => (
-                <CompleteGame
-                  type={item.itemType}
-                  data={date}
-                  price={item.itemPrice}
-                  game={item.itemGame}
-                  color={item.itemColor}
-                />
-              ))}
+            {cartItems.map(
+              (item: any) => (
+                (finalPrice = finalPrice + item.itemPrice),
+                (
+                  <CompleteGame
+                    key={item.itemID}
+                    item={{
+                      id: item.itemID,
+                      type: item.itemType,
+                      data: date,
+                      price: item.itemPrice,
+                      game: item.itemGame,
+                      color: item.itemColor,
+                      quantity: item.quantity,
+                    }}
+                  />
+                )
+              )
+            )}
             {!toggleItem && <p>Seu carrinho está vazio!!!</p>}
             <h3>
               Cart <span>total: </span>

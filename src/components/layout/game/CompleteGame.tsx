@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { cartActcion } from "../../../store/cart";
 import { Game } from "./styled";
-
 const CompleteGame = (props: any) => {
-  const { type, data, price, game, color } = props;
+  const dispatch = useDispatch();
+  const { id, type, data, price, game, color } = props.item;
+
+  const cartRef = useRef<any>(0);
+
+  const excludeHandler = (ev: any) => {
+    ev.preventDefault();
+    dispatch(cartActcion.removeItemToCart(cartRef.current.id));
+  };
+
   return (
-    <React.Fragment>
-      <Game key={(Math.random() * 10).toFixed(2)} color={color}>
-        <p>{game}</p>
+    <Game id={id} key={id} color={color} ref={cartRef}>
+      <button type="button" onClick={excludeHandler}></button>
+      <div className="infos-game">
+        <p>{game.toString()}</p>
         <p>
           <span>{data}</span> -
           <span>
@@ -17,8 +28,8 @@ const CompleteGame = (props: any) => {
           </span>
         </p>
         <p className="type">{type}</p>
-      </Game>
-    </React.Fragment>
+      </div>
+    </Game>
   );
 };
 
