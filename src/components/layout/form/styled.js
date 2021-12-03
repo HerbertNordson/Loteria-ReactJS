@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  margin: auto;
-  height: 100%;
-
+  &form {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: auto;
+    height: 100%;
+  }
   form input {
-    width: 100%;
-    padding: 2em;
+    width: 95%;
+    padding: 2em 1em;
     border: none;
     border-bottom: 2px solid #ebebeb;
     outline: none;
@@ -22,18 +23,18 @@ export const Container = styled.div`
 
   a {
     position: relative;
-    text-align: right;
     font-style: italic;
-    margin: 1.5em;
+    margin-right: -50%;
     text-decoration: none;
     color: #707070;
   }
 
   button {
+    display: block;
     border: none;
     font-size: 2rem;
     font-weight: 600;
-    margin: 0.5em 1em 1em;
+    margin: 1em auto;
     background: transparent;
     color: #b5c401 !important;
     outline: none;

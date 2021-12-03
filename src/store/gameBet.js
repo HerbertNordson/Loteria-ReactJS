@@ -11,6 +11,9 @@ const betSlice = createSlice({
     toggle(state) {
       state.itemCart = true;
     },
+    removeToggle(state) {
+      state.itemCart = false;
+    },
   },
 });
 

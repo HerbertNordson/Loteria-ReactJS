@@ -9,38 +9,8 @@ export const TypesContent = styled.main`
   text-transform: uppercase;
   font-style: italic;
 
-  .Cart {
-    width: 30%;
-    padding: 2em;
-  }
-
-  .Cart h3,
-  .Cart div > div {
-    text-transform: uppercase;
-    font-style: italic;
-    margin: 1em;
-  }
-
-  .Cart button {
-    background: #e2e2e2;
-    color: #27c383;
-    border: none;
-    border-top: 1px solid #f4f4f4;
-    font-size: 2rem;
-    text-align: center;
-    width: 100%;
-    padding: 0.5em;
-    overflow: hidden;
-    cursor: pointer;
-  }
-
   @media (max-width: 780px) {
     flex-direction: column;
-
-    .Cart {
-      width: auto;
-      padding: 2em 0;
-    }
   }
 `;
 

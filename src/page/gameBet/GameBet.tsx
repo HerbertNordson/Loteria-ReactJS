@@ -1,16 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActcion } from "../../../store/cart";
+import { cartActcion } from "../../store/cart";
 
-import ButtonFilter from "../../layout/button/buttonFitler";
-import ButtonsAct from "../../layout/buttonAct/buttonAct";
-import CompleteGame from "../../layout/game/CompleteGame";
-import Header from "../../layout/header/Header";
-import ButtonNumber from "../../layout/buttonNumbers/buttonNumbers";
+import ButtonFilter from "../../components/layout/button/buttonFitler";
+import ButtonsAct from "../../components/layout/buttonAct/buttonAct";
+import Header from "../../components/layout/header/Header";
+import ButtonNumber from "../../components/layout/buttonNumbers/buttonNumbers";
 
-import { Card } from "../../layout/card/styled";
 import { TypesCenter, TypesContent } from "./styled";
-import { numberActions } from "../../../store/gameNumber";
+import { numberActions } from "../../store/gameNumber";
+import Cart from "../../components/layout/cart/cart";
+import { betActions } from "../../store/gameBet";
 
 interface IPropsData {
   data: any[];
@@ -25,13 +25,11 @@ const GameBet: React.FC<IPropsData> = (props) => {
   const [color, setColor] = useState<string>("");
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch();
-  const toggleItem = useSelector((state: any) => state.gameBet.itemCart);
   const cartItems = useSelector((state: any) => state.cart.items);
   const game = useSelector((state: any) => state.number.numberArr);
 
-  let finalPrice: number = 0;
-  const data = new Date();
-  const date = data.getDay() + "/" + data.getMonth() + "/" + data.getFullYear();
+  const date = new Date();
+  const data = date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
 
   useEffect(() => {
     props.data.map((content) => {
@@ -64,13 +62,16 @@ const GameBet: React.FC<IPropsData> = (props) => {
 
   const addToCartHandler = () => {
     if (game.length < maxNumber) {
-      return alert(
+      alert(
         `Faltam ${maxNumber - game.length} números para concluir o seu jogo!`
       );
+      dispatch(betActions.removeToggle());
+      return;
     }
     dispatch(
       cartActcion.addItemToCart({
         game,
+        data,
         price,
         type,
         date,
@@ -117,41 +118,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
 
           <ButtonsAct onClean={cleanGame} onAdd={addToCartHandler} />
         </TypesCenter>
-        <div className="Cart">
-          <Card>
-            <h3>Cart</h3>
-            {cartItems.map(
-              (item: any) => (
-                (finalPrice = finalPrice + item.itemPrice),
-                (
-                  <CompleteGame
-                    key={item.itemID}
-                    item={{
-                      id: item.itemID,
-                      type: item.itemType,
-                      data: date,
-                      price: item.itemPrice,
-                      game: item.itemGame,
-                      color: item.itemColor,
-                      quantity: item.quantity,
-                    }}
-                  />
-                )
-              )
-            )}
-            {!toggleItem && <p>Seu carrinho está vazio!!!</p>}
-            <h3>
-              Cart <span>total: </span>
-              {finalPrice > 0
-                ? finalPrice.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })
-                : "R$ 0,00"}
-            </h3>
-            <button>Save</button>
-          </Card>
-        </div>
+        <Cart cartItems={cartItems} />
       </TypesContent>
     </Fragment>
   );

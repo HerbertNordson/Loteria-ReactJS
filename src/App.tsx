@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { RootStateOrAny, useSelector } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+
 import "./App.css";
-import GameBet from "./components/page/gameBet/GameBet";
-import Home from "./components/page/home/Home";
+import Rota from "./services/rotas";
 
 const App = () => {
   const [data, setData] = useState<any[]>([]);
@@ -23,8 +24,9 @@ const App = () => {
 
   return (
     <div className="App">
-      {!Auth && <Home />}
-      {Auth && <GameBet data={data} />}
+      <BrowserRouter>
+        <Rota />
+      </BrowserRouter>
       <footer>Copyright 2020 Luby Software</footer>
     </div>
   );

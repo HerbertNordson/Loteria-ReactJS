@@ -14,6 +14,7 @@ const cartSlice = createSlice({
       const newItem = action.payload;
       state.items.push({
         itemID: state.count++,
+        itemDate: newItem.data,
         itemGame: newItem.game,
         itemType: newItem.type,
         itemPrice: newItem.price,
@@ -25,6 +26,7 @@ const cartSlice = createSlice({
     removeItemToCart(state, action) {
       const id = action.payload;
       state.items = state.items.filter((item) => +item.itemID !== +id);
+      state.totalQuantity--;
     },
   },
 });

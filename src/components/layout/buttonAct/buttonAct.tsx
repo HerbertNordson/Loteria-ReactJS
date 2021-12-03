@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { betActions } from "../../../store/gameBet";
 import { numberActions } from "../../../store/gameNumber";
 import { Act } from "./styled";
@@ -10,6 +10,7 @@ interface IPropsACT {
 
 const ButtonsAct: React.FC<IPropsACT> = (props) => {
   const dispatch = useDispatch();
+  const cartItem = useSelector((state: any) => state.cart.items);
 
   function onHandlerClean() {
     dispatch(numberActions.handlerRemoveArrNumbers());

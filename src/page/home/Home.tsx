@@ -1,9 +1,11 @@
-import { Card } from "../../layout/card/styled";
-import { Container } from "../home/styled";
-import TitleHome from "../../layout/home/TitleHome";
-import FormAuth from "../../layout/form/FormAuth";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../../store/auth";
+import { authActions } from "../../store/auth";
+
+import { Card } from "../../components/layout/card/styled";
+import { Container } from "./styled";
+
+import TitleHome from "../../components/layout/home/TitleHome";
+import FormAuth from "../../components/layout/form/FormAuth";
 // import FormResgiter from "../../layout/form/FormRegister";
 // import FormReset from "../../layout/form/FormReset";
 
