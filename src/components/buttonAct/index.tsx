@@ -1,6 +1,7 @@
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { betActions } from "../../store/gameBet";
-import { numberActions } from "../../store/gameNumber";
+
+import { numberActions, betActions } from "../../store/";
+
 import { IPropsACT } from "./interface";
 import { Act } from "./styles";
 

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { numberActions } from "../../store/gameNumber";
+
+import { numberActions } from "../../store/";
+
 import { Number } from "./styles";
 
 interface IPropsNumbers {

@@ -10,7 +10,7 @@ const ButtonFilter: React.FC<IProps> = (props) => {
 
   return (
     <React.Fragment>
-      {props.data.map((item: IItemMap) => {
+      {props.data?.map((item: IItemMap) => {
         return (
           <ButtonType
             color={item.color}

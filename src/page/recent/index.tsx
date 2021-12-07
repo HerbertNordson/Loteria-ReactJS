@@ -1,13 +1,16 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Button from "../../components/button/";
-import { GameRecent } from "../../components";
-import Header from "../../components/header/";
-import { Center, Content, Filters } from "./styles";
-import { IGameItem, ISaveItem } from "./interface";
 
-const RecentGame: React.FC<{}> = (props) => {
+import { GameRecent, Button, Header } from "../../components";
+
+import { IGameItem, ISaveItem } from "./interface";
+import { IProps } from "../../services/interface";
+import { Center, Content, Filters } from "./styles";
+
+const RecentGame: React.FC<IProps> = (props) => {
   const cartSave = useSelector((state: ISaveItem) => state.save.itemsSave);
+
+  function onFilterItems() {}
 
   return (
     <>
@@ -18,9 +21,7 @@ const RecentGame: React.FC<{}> = (props) => {
             <h3>Recent Games</h3>
             <Filters>
               <span>Filters</span>
-              {/* <Button /> */}
-              <button>Mega-sena</button>
-              <button>Lotomania</button>
+              <Button data={props.data} onContent={onFilterItems} />
             </Filters>
           </div>
           <div className="gamesRecents">

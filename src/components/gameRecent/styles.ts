@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Game = styled.div`
   display: flex;
-  justify-content: start;
   align-items: center;
   flex-wrap: wrap;
   padding: 0.5em;

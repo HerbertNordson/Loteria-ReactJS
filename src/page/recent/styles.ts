@@ -4,6 +4,14 @@ export const Content = styled.main`
   display: flex;
   justify-content: center;
 
+  & a {
+    text-decoration: none;
+    color: #b5c401;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 1.5em;
+  }
+
   @media (max-width: 780px) {
     flex-direction: column-reverse;
 
@@ -11,6 +19,12 @@ export const Content = styled.main`
       margin-top: 1em;
       margin-right: 1em;
       text-align: right;
+    }
+
+    & a {
+      position: fixed;
+      right: 0.5em;
+      bottom: 2em;
     }
   }
 `;

@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Card } from "../card/styles";
-import { CartItems } from "./styles";
+
 import { Game } from "../index";
-import { cartActcion, saveCartItems } from "../../store/cart";
-import { betActions } from "../../store/gameBet";
+
+import { cartActcion, saveCartItems, betActions } from "../../store/";
+
+import { CartItems } from "./styles";
+import { Card } from "../card/styles";
 import { IPropsBet, IPropsItem } from "./interface";
-import { ICartItems } from "../../store/interface";
 
 interface IPropCart {
   cartItems: any;

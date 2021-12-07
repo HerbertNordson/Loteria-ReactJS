@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth";
+import { authActions } from "../../store";
 
-import { Card } from "../../components/card/styles";
+import {
+  Card,
+  TitleHome,
+  FormAuth,
+  FormReset,
+  FormResgiter,
+} from "../../components";
+
 import { Container } from "./styles";
-
-import TitleHome from "../../components/home/TitleHome";
-import FormAuth from "../../components/form/FormAuth";
-// import FormResgiter from "../../layout/form/FormRegister";
-// import FormReset from "../../layout/form/FormReset";
 
 const Home = () => {
   const dispach = useDispatch();
@@ -26,8 +28,8 @@ const Home = () => {
         <h3>Authentication</h3>
         <Card>
           <FormAuth onLogin={loginHandler} />
-          {/* <FormResgiter /> */}
-          {/* <FormReset /> */}
+          <FormResgiter />
+          <FormReset />
         </Card>
         <button>Sign Up</button>
       </div>

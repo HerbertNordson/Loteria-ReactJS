@@ -1,7 +1,7 @@
 export interface IProps {
-  name: string | null;
+  name?: string | null;
   onContent: (props: string | null) => void;
-  data: [
+  data?: [
     {
       color?: string;
       type?: string;

@@ -46,8 +46,11 @@ export const Game = styled.div`
 
   @media (max-width: 780px) {
     & > button > img {
-      width: 8vw;
-      height: 8vw;
+      width: 5vw;
+      height: 5vw;
+    }
+    .infos-game > p {
+      width: auto;
     }
   }
 `;

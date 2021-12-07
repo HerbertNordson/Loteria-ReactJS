@@ -1,14 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActcion } from "../../store/cart";
-import { betActions } from "../../store/gameBet";
+
+import { cartActcion, betActions } from "../../store/";
+
 import { IPropsGame, ITotal } from "./interface";
 import { Game } from "./styles";
 
 const CompleteGame: React.FC<IPropsGame> = (props) => {
   const dispatch = useDispatch();
   const cartRef = useRef<any>(0);
-  let name: string = props.name;
   const itemsCart = useSelector((state: ITotal) => state.cart.totalQuantity);
 
   const { id, type, data, price, game, color } = props.item;

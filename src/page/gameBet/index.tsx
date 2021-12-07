@@ -1,13 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActcion } from "../../store/cart";
 
-import { Button, ButtonsAct, Header, ButtonNumber } from "../../components/";
+import { cartActcion, numberActions, betActions } from "../../store";
+
+import {
+  Button,
+  ButtonsAct,
+  Header,
+  ButtonNumber,
+  Cart,
+} from "../../components";
 
 import { TypesCenter, TypesContent } from "./styles";
-import { numberActions } from "../../store/gameNumber";
-import Cart from "../../components/cart/cart";
-import { betActions } from "../../store/gameBet";
 import { IContent, IGame, IPropsData, IPropsState } from "./interfaces";
 
 const GameBet: React.FC<IPropsData> = (props) => {
