@@ -1,19 +1,22 @@
+import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 
-import { Card } from "../../components/layout/card/styled";
-import { Container } from "./styled";
+import { Card } from "../../components/card/styles";
+import { Container } from "./styles";
 
-import TitleHome from "../../components/layout/home/TitleHome";
-import FormAuth from "../../components/layout/form/FormAuth";
+import TitleHome from "../../components/home/TitleHome";
+import FormAuth from "../../components/form/FormAuth";
 // import FormResgiter from "../../layout/form/FormRegister";
 // import FormReset from "../../layout/form/FormReset";
 
 const Home = () => {
   const dispach = useDispatch();
-
+  const navigate = useNavigate();
   const loginHandler = () => {
     dispach(authActions.login());
+    navigate("/game");
+    return;
   };
 
   return (

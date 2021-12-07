@@ -2,19 +2,13 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActcion } from "../../store/cart";
 
-import ButtonFilter from "../../components/layout/button/buttonFitler";
-import ButtonsAct from "../../components/layout/buttonAct/buttonAct";
-import Header from "../../components/layout/header/Header";
-import ButtonNumber from "../../components/layout/buttonNumbers/buttonNumbers";
+import { Button, ButtonsAct, Header, ButtonNumber } from "../../components/";
 
-import { TypesCenter, TypesContent } from "./styled";
+import { TypesCenter, TypesContent } from "./styles";
 import { numberActions } from "../../store/gameNumber";
-import Cart from "../../components/layout/cart/cart";
+import Cart from "../../components/cart/cart";
 import { betActions } from "../../store/gameBet";
-
-interface IPropsData {
-  data: any[];
-}
+import { IContent, IGame, IPropsData, IPropsState } from "./interfaces";
 
 const GameBet: React.FC<IPropsData> = (props) => {
   const [type, setType] = useState<string | null>("Lotofácil");
@@ -25,14 +19,14 @@ const GameBet: React.FC<IPropsData> = (props) => {
   const [color, setColor] = useState<string>("");
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch();
-  const cartItems = useSelector((state: any) => state.cart.items);
-  const game = useSelector((state: any) => state.number.numberArr);
+  const cartItems = useSelector((state: IPropsState) => state.cart.items);
+  const game = useSelector((state: IGame) => state.number.numberArr);
 
-  const date = new Date();
+  let date = new Date();
   const data = date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
 
   useEffect(() => {
-    props.data.map((content) => {
+    props.data.map((content: any) => {
       if (content.type === type) {
         return ContentTypesHandler(content);
       }
@@ -40,7 +34,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
     });
   }, [props.data, ContentTypesHandler, type]);
 
-  function ContentTypesHandler(props: any) {
+  function ContentTypesHandler(props: IContent): void {
     setType(props.type);
     setDescription(props.description);
     setRange(props.range);
@@ -55,12 +49,12 @@ const GameBet: React.FC<IPropsData> = (props) => {
     setRange(0);
   }
 
-  function onHandlerClick(props: string | null) {
+  function onHandlerClick(props: string | null): void {
     cleanGame();
     setType(props);
   }
 
-  const addToCartHandler = () => {
+  const addToCartHandler = (): void => {
     if (game.length < maxNumber) {
       alert(
         `Faltam ${maxNumber - game.length} números para concluir o seu jogo!`
@@ -81,7 +75,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
     onHandlerClick(type);
   };
 
-  const countHandler = (props: string) => {
+  const countHandler = (props: string): void => {
     if (props === "REMOVE") {
       setCount(count - 1);
     } else if (props === "ADD") {
@@ -97,11 +91,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
           <h2>New bet for {type}</h2>
           <p>Choose a game</p>
 
-          <ButtonFilter
-            name={type}
-            onContent={onHandlerClick}
-            data={props.data}
-          />
+          <Button name={type} onContent={onHandlerClick} data={props.data} />
 
           <p>
             Fill your bet

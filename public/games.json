@@ -24,39 +24,6 @@
       "price": 2,
       "max-number": 5,
       "color": "#F79C31"
-    },
-	{
-      "type": "Dupla-sena",
-      "description": "Escolha 5 números dos 80 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
-      "range": 10,
-      "price": 5,
-      "max-number": 5,
-      "color": "red"
-    },
-	{
-      "type": "Tripla-sena",
-      "description": "Escolha 5 números dos 80 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
-      "range": 10,
-      "price": 5,
-      "max-number": 5,
-      "color": "black"
-    }
-	,
-	{
-      "type": "Quadra-sena",
-      "description": "Escolha 5 números dos 80 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
-      "range": 8,
-      "price": 4,
-      "max-number": 4,
-      "color": "green"
-    },
-	{
-      "type": "Quinta-sena",
-      "description": "Escolha 5 números dos 80 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
-      "range": 15,
-      "price": 4,
-      "max-number": 6,
-      "color": "blue"
     }
   ]
 }

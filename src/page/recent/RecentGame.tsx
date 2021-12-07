@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
-import ButtonFilter from "../../components/layout/button/buttonFitler";
-import CompleteGame from "../../components/layout/game/CompleteGame";
-import Header from "../../components/layout/header/Header";
-import { Center, Content, Filters } from "./styled";
+import { Link } from "react-router-dom";
+import Button from "../../components/button/";
+import { GameRecent } from "../../components";
+import Header from "../../components/header/";
+import { Center, Content, Filters } from "./styles";
+import { IGameItem, ISaveItem } from "./interface";
 
 const RecentGame: React.FC<{}> = (props) => {
-  const cartSave = useSelector((state: any) => state.save.itemsSave);
-  console.log(cartSave);
+  const cartSave = useSelector((state: ISaveItem) => state.save.itemsSave);
+
   return (
     <>
       <Header />
@@ -16,30 +18,31 @@ const RecentGame: React.FC<{}> = (props) => {
             <h3>Recent Games</h3>
             <Filters>
               <span>Filters</span>
-              {/* <ButtonFilter/> */}
+              {/* <Button /> */}
               <button>Mega-sena</button>
               <button>Lotomania</button>
             </Filters>
           </div>
           <div className="gamesRecents">
-            {cartSave.map((item: any) => (
-              <CompleteGame
-                key={item.itemID}
+            {cartSave?.map((item: IGameItem) => (
+              <GameRecent
+                key={item.ID}
                 item={{
-                  id: item.itemID,
-                  type: item.itemType,
-                  data: item.itemDate,
-                  price: item.itemPrice,
-                  game: item.itemGame,
-                  color: item.itemColor,
+                  id: item.ID,
+                  type: item.Type,
+                  data: item.Data,
+                  price: item.Price,
+                  game: item.Game,
+                  color: item.Color,
                   quantity: item.quantity,
                 }}
+                name={"Recent"}
               />
             ))}
           </div>
         </Center>
 
-        <button> {"New bet ->"} </button>
+        <Link to="/game"> {"New bet ->"} </Link>
       </Content>
     </>
   );

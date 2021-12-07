@@ -6,11 +6,10 @@ import "./App.css";
 import Rota from "./services/rotas";
 
 const App = () => {
-  const [data, setData] = useState<any[]>([]);
-
   const Auth = useSelector(
     (state: RootStateOrAny) => state.auth.isAuthenticated
   );
+  const [data, setData] = useState<[{}]>([{}]);
 
   useEffect(() => {
     fetch("./games.json", {
@@ -25,7 +24,7 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Rota />
+        <Rota data={data} />
       </BrowserRouter>
       <footer>Copyright 2020 Luby Software</footer>
     </div>
