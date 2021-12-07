@@ -11,7 +11,9 @@ export const Content = styled.main`
     font-size: 1.5em;
     margin-top: 1.5em;
   }
-
+  & p {
+    margin: auto;
+  }
   @media (max-width: 780px) {
     flex-direction: column-reverse;
 

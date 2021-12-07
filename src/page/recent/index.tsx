@@ -6,11 +6,16 @@ import { GameRecent, Button, Header } from "../../components";
 import { IGameItem, ISaveItem } from "./interface";
 import { IProps } from "../../services/interface";
 import { Center, Content, Filters } from "./styles";
+import { useState } from "react";
 
 const RecentGame: React.FC<IProps> = (props) => {
   const cartSave = useSelector((state: ISaveItem) => state.save.itemsSave);
+  const [filter, setFilter] = useState<[]>(cartSave);
 
-  function onFilterItems() {}
+  function onFilterItems(props: string | null) {
+    let newArr: any = cartSave.filter((item: IGameItem) => item.Type === props);
+    setFilter(newArr);
+  }
 
   return (
     <>
@@ -25,7 +30,10 @@ const RecentGame: React.FC<IProps> = (props) => {
             </Filters>
           </div>
           <div className="gamesRecents">
-            {cartSave?.map((item: IGameItem) => (
+            {filter.length === 0 && (
+              <p>Você não fez nenhum jogo recentemente!</p>
+            )}
+            {filter?.map((item: IGameItem) => (
               <GameRecent
                 key={item.ID}
                 item={{

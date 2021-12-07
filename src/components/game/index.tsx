@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { cartActcion, betActions } from "../../store/";
@@ -10,7 +10,6 @@ const CompleteGame: React.FC<IPropsGame> = (props) => {
   const dispatch = useDispatch();
   const cartRef = useRef<any>(0);
   const itemsCart = useSelector((state: ITotal) => state.cart.totalQuantity);
-
   const { id, type, data, price, game, color } = props.item;
 
   const excludeHandler = () => {

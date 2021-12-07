@@ -12,7 +12,7 @@ const Home = () => {
   const navigate = useNavigate();
   const loginHandler = () => {
     dispach(authActions.login());
-    navigate("/game");
+    navigate("/home");
     return;
   };
 
