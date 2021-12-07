@@ -87,6 +87,19 @@ const GameBet: React.FC<IPropsData> = (props) => {
     }
   };
 
+  function randomGame() {
+    let rd = maxNumber - game.length;
+    let random;
+    for (let i = 0; i < rd; i++) {
+      random = Math.floor(Math.random() * range + 1);
+      while (game.indexOf(random) >= 0) {
+        random = Math.floor(Math.random() * range);
+      }
+      dispatch(numberActions.handlerArrNumbers(random));
+      setCount(count + 1);
+    }
+  }
+
   return (
     <Fragment>
       <Header />
@@ -110,7 +123,11 @@ const GameBet: React.FC<IPropsData> = (props) => {
             onHandlerCount={countHandler}
           />
 
-          <ButtonsAct onClean={cleanGame} onAdd={addToCartHandler} />
+          <ButtonsAct
+            onClean={cleanGame}
+            onAdd={addToCartHandler}
+            onRandom={randomGame}
+          />
         </TypesCenter>
         <Cart cartItems={cartItems} />
       </TypesContent>

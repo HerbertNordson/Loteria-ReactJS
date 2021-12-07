@@ -16,6 +16,7 @@ export const Container = styled.div`
 
   & div h3 {
     font-size: 2rem;
+    margin-bottom: 1em;
   }
 
   & div > button {
@@ -23,7 +24,7 @@ export const Container = styled.div`
     font-size: 2rem;
     font-weight: 600;
     font-style: italic;
-    margin: 0.5em 1em 1em;
+    margin: 1em;
     color: #707070;
     background: transparent;
     outline: none;

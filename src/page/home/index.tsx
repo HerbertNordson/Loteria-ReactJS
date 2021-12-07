@@ -2,15 +2,10 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 
-import {
-  Card,
-  TitleHome,
-  FormAuth,
-  FormReset,
-  FormResgiter,
-} from "../../components";
+import { TitleHome, FormAuth, FormReset, FormResgiter } from "../../components";
 
 import { Container } from "./styles";
+import { useState } from "react";
 
 const Home = () => {
   const dispach = useDispatch();
@@ -21,17 +16,21 @@ const Home = () => {
     return;
   };
 
+  const [formType, setFormType] = useState<string>("Login");
+
+  const handlerFormType = (props: string) => {
+    setFormType(props);
+  };
+
   return (
     <Container>
       <TitleHome />
       <div>
-        <h3>Authentication</h3>
-        <Card>
-          <FormAuth onLogin={loginHandler} />
-          <FormResgiter />
-          <FormReset />
-        </Card>
-        <button>Sign Up</button>
+        {formType === "Login" && (
+          <FormAuth onLogin={loginHandler} onType={handlerFormType} />
+        )}
+        {formType === "Register" && <FormResgiter onType={handlerFormType} />}
+        {formType === "Reset" && <FormReset onType={handlerFormType} />}
       </div>
     </Container>
   );

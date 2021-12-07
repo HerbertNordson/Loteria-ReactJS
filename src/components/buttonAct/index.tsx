@@ -19,10 +19,14 @@ const ButtonsAct: React.FC<IPropsACT> = (props) => {
     props.onAdd();
   };
 
+  const itemHandleRandom = () => {
+    props.onRandom();
+  };
+
   return (
     <Act>
       <div>
-        <button>Complete game</button>
+        <button onClick={itemHandleRandom}>Complete game</button>
         <button onClick={onHandlerClean}>Clear game</button>
       </div>
       <button className="add" onClick={itemHandleCart}>

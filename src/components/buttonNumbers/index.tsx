@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { IGame } from "../../page/gameBet/interfaces";
 
 import { numberActions } from "../../store/";
 
@@ -16,6 +17,7 @@ interface IPropsNumbers {
 const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
   const numberArray: number[] = [];
   const [btnArray, setBtnArray] = useState<number[]>([]);
+  const game = useSelector((state: IGame) => state.number.numberArr);
   const dispatch = useDispatch();
 
   for (let i = 1; i <= props.number; i++) {
@@ -57,17 +59,11 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
 
   return (
     <>
-      {numberArray.map((btn) => {
-        return (
-          <Number
-            value={btn.valueOf()}
-            key={btn}
-            onClick={onButtonClickHandler}
-          >
-            {btn < 10 ? "0" + btn : btn}
-          </Number>
-        );
-      })}
+      {numberArray.map((btn) => (
+        <Number value={btn.valueOf()} key={btn} onClick={onButtonClickHandler}>
+          {btn < 10 ? "0" + btn : btn}
+        </Number>
+      ))}
     </>
   );
 };
