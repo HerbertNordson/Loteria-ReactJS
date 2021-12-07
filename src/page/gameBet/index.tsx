@@ -1,15 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { cartActcion, numberActions, betActions } from "../../store";
+import { cartActcion, numberActions, betActions } from "@reduxStore";
 
-import {
-  Button,
-  ButtonsAct,
-  Header,
-  ButtonNumber,
-  Cart,
-} from "../../components";
+import { Button, ButtonsAct, Header, ButtonNumber, Cart } from "@components";
 
 import { TypesCenter, TypesContent } from "./styles";
 import { IContent, IGame, IPropsData, IPropsState } from "./interfaces";
@@ -57,7 +51,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
     cleanGame();
     setType(props);
   }
-
+  console.log(cartItems[0]);
   const addToCartHandler = (): void => {
     if (game.length < maxNumber) {
       alert(
@@ -66,6 +60,12 @@ const GameBet: React.FC<IPropsData> = (props) => {
       dispatch(betActions.removeToggle());
       return;
     }
+
+    // for (let i = 0; i < game.length; i++) {
+    //   if (game[i] === cartItems[i].itemGame) {
+    //   }
+    // }
+
     dispatch(
       cartActcion.addItemToCart({
         game,

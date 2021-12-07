@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { GameRecent, Button, Header } from "../../components";
+import { GameRecent, Button, Header } from "@components";
 
 import { IGameItem, ISaveItem } from "./interface";
 import { IProps } from "../../services/interface";

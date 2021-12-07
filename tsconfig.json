@@ -2,6 +2,14 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "baseUrl": "./src",
+    "paths": {
+      "@components/**": ["components/**"],
+      "@reduxStore/**": ["store/**"],
+      "@pages/**": ["page/**"]
+    },
+    "rootDir": ".",
+    "sourceMap": true,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,5 +25,5 @@
     "jsx": "react-jsx",
     "experimentalDecorators": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

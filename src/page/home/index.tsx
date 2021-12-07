@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store";
+import { authActions } from "@reduxStore";
 
-import { TitleHome, FormAuth, FormReset, FormResgiter } from "../../components";
+import { TitleHome, FormAuth, FormReset, FormResgiter } from "@components";
 
 import { Container } from "./styles";
 import { useState } from "react";
