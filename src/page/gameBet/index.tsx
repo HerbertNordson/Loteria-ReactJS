@@ -5,6 +5,7 @@ import { cartActcion, numberActions, betActions } from "@reduxStore";
 
 import { Button, ButtonsAct, Header, ButtonNumber, Cart } from "@components";
 
+import { toast } from "react-toastify";
 import { TypesCenter, TypesContent } from "./styles";
 import { IContent, IGame, IPropsData, IPropsState } from "./interfaces";
 
@@ -47,10 +48,9 @@ const GameBet: React.FC<IPropsData> = (props) => {
 
   const addToCartHandler = (): void => {
     if (game.length < maxNumber) {
-      alert(
-        `Faltam ${maxNumber - game.length} números para concluir o seu jogo!`
+      toast.warning(
+        `Restam ${maxNumber - game.length} números para concluir o seu jogo!`
       );
-      dispatch(betActions.removeToggle());
       return;
     }
     dispatch(

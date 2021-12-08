@@ -40,4 +40,10 @@ export const Container = styled.div`
     outline: none;
     cursor: pointer;
   }
+
+  @media (max-width: 780px) {
+    a {
+      margin-right: -45%;
+    }
+  }
 `;

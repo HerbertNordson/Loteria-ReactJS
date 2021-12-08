@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { numberActions } from "../../store/";
 
 import { Number } from "./styles";
+import { toast } from "react-toastify";
 
 interface IPropsNumbers {
   number: number;
@@ -33,7 +34,7 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
           return;
         }
       }
-      alert(
+      toast.warning(
         "Seu jogo está completo! Remova um número para inserir um novo ou adicione sua aposta ao carrinho!"
       );
       return;

@@ -13,6 +13,7 @@ export const Game = styled.div`
     border-left: 0.3em solid ${(props) => props.color};
     border-bottom-left-radius: 0.2em;
     border-top-left-radius: 0.2em;
+    width: 80%;
   }
   .infos-game > p {
     width: 15vw;
@@ -48,6 +49,9 @@ export const Game = styled.div`
     & > button > img {
       width: 5vw;
       height: 5vw;
+    }
+    .infos-game {
+      width: 12em;
     }
     .infos-game > p {
       width: auto;

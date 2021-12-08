@@ -10,13 +10,13 @@ import { useState } from "react";
 const Home = () => {
   const dispach = useDispatch();
   const navigate = useNavigate();
-  const loginHandler = () => {
-    dispach(authActions.login());
+  const [formType, setFormType] = useState<string>("Login");
+
+  const loginHandler = (props: string) => {
+    dispach(authActions.login(props));
     navigate("/home");
     return;
   };
-
-  const [formType, setFormType] = useState<string>("Login");
 
   const handlerFormType = (props: string) => {
     setFormType(props);

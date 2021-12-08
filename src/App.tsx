@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import "./App.css";
 import Rota from "./services/rotas";
@@ -19,6 +20,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <ToastContainer />
       <BrowserRouter>
         <Rota data={data} />
       </BrowserRouter>

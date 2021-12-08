@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
-import { GameBet, Home, RecentGame } from "../page/";
+import { GameBet, Home, RecentGame, Account } from "@pages/";
 
 import { IAuth, IProps } from "./interface";
 
@@ -15,6 +15,7 @@ const Rota: React.FC<IProps> = (props) => {
         <>
           <Route path="/home" element={<RecentGame data={props.data} />} />
           <Route path="/game" element={<GameBet data={props.data} />} />
+          <Route path="/account" element={<Account />} />
         </>
       )}
     </Routes>

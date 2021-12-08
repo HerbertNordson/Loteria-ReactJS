@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import { Game } from "../index";
-
-import { cartActcion, saveCartItems, betActions } from "../../store/";
+import { cartActcion, saveCartItems, betActions } from "@reduxStore";
 
 import { CartItems } from "./styles";
 import { Card } from "../card/styles";
+import "react-toastify/dist/ReactToastify.css";
+
 import { IPropsBet, IPropsItem } from "./interface";
 
 interface IPropCart {
@@ -24,37 +26,41 @@ const Cart: React.FC<IPropCart> = (props) => {
         dispatch(cartActcion.removeItemToCart(props.cartItems[i].itemID));
       }
       dispatch(betActions.removeToggle());
-      return alert("Suas apostas foram salvas, agora é só cruzar os dedos ;)");
+      return toast.success("Sorte lançada! Agora é só cruzar os dedos 🤞");
     }
-    alert("Faça pelo menos uma aposta para salvar");
+    toast.error("Você precisa de pelo menos 1 jogo para efetuar sua aposta!");
   };
 
   return (
     <CartItems>
       <Card>
         <h3>Cart</h3>
-        {toggleItem &&
-          props.cartItems.map(
-            (item: IPropsItem) => (
-              (finalPrice = finalPrice + item.itemPrice),
-              (
-                <Game
-                  key={item.itemID}
-                  name={"Cart"}
-                  item={{
-                    id: item.itemID,
-                    type: item.itemType,
-                    data: item.itemData,
-                    price: item.itemPrice,
-                    game: item.itemGame,
-                    color: item.itemColor,
-                    quantity: item.quantity,
-                  }}
-                />
+        <div className={"games"}>
+          {toggleItem &&
+            props.cartItems.map(
+              (item: IPropsItem) => (
+                (finalPrice = finalPrice + item.itemPrice),
+                (
+                  <Game
+                    key={item.itemID}
+                    name={"Cart"}
+                    item={{
+                      id: item.itemID,
+                      type: item.itemType,
+                      data: item.itemData,
+                      price: item.itemPrice,
+                      game: item.itemGame,
+                      color: item.itemColor,
+                      quantity: item.quantity,
+                    }}
+                  />
+                )
               )
-            )
+            )}
+          {!toggleItem && (
+            <p className="CartNull">Seu carrinho está vazio!!!</p>
           )}
-        {!toggleItem && <p className="CartNull">Seu carrinho está vazio!!!</p>}
+        </div>
         <h3>
           Cart <span>total: </span>
           {finalPrice > 0

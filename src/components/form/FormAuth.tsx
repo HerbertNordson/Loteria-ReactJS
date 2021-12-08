@@ -11,7 +11,7 @@ const Users = [
 ];
 
 interface IPropsForm {
-  onLogin: () => void;
+  onLogin: (props: string) => void;
   onType: (props: string) => void;
 }
 
@@ -22,7 +22,7 @@ const FormAuth: React.FC<IPropsForm> = (props) => {
   const submitHandler = () => {
     Users.map((item: any) => {
       if (item.email === email && item.senha === password) {
-        props.onLogin();
+        props.onLogin(item.email);
       } else {
         alert("Email ou Senha incorreto!");
       }

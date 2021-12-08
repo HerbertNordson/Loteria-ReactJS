@@ -14,13 +14,13 @@ const Header = () => {
   return (
     <HeaderContainer>
       <div className="menu">
-        <a href="/" className="TGL">
+        <Link to="/home" className="TGL">
           TGL
-        </a>
+        </Link>
         <Link to="/home">Home</Link>
       </div>
       <div className="menu">
-        <a href="/">Account</a>
+        <Link to="/account">Account</Link>
         <Link to="/" onClick={deslogger}>
           Log out
         </Link>
