@@ -43,6 +43,7 @@ export const Center = styled.section`
   & div {
     display: flex;
     width: auto;
+    align-items: center;
   }
 
   & h3 {
@@ -53,6 +54,7 @@ export const Center = styled.section`
   .gamesRecents {
     min-height: 70vh;
     flex-direction: column;
+    align-items: start;
   }
 
   @media (max-width: 780px) {
@@ -61,6 +63,7 @@ export const Center = styled.section`
 
     & div {
       flex-direction: column;
+      width: 90%;
     }
 
     .gamesRecents {

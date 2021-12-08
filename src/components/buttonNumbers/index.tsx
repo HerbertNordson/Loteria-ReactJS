@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { IGame } from "../../page/gameBet/interfaces";
+import { useDispatch } from "react-redux";
 
 import { numberActions } from "../../store/";
 
@@ -17,7 +16,6 @@ interface IPropsNumbers {
 const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
   const numberArray: number[] = [];
   const [btnArray, setBtnArray] = useState<number[]>([]);
-  const game = useSelector((state: IGame) => state.number.numberArr);
   const dispatch = useDispatch();
 
   for (let i = 1; i <= props.number; i++) {
@@ -25,8 +23,7 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
   }
 
   function onButtonClickHandler(ev: any) {
-    ev.preventDefault();
-    if (props.count > props.maxRange) {
+    if (props.count >= props.maxRange) {
       for (let i = 0; i < btnArray.length; i++) {
         if (ev.target.value === btnArray[i]) {
           ev.target.removeAttribute("style");
@@ -36,13 +33,14 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
           return;
         }
       }
-      return alert(
+      alert(
         "Seu jogo está completo! Remova um número para inserir um novo ou adicione sua aposta ao carrinho!"
       );
+      return;
     }
     if (ev.target.classList.contains("ativo")) {
-      ev.target.removeAttribute("style");
       ev.target.classList.remove("ativo");
+      ev.target.removeAttribute("style");
       setBtnArray(btnArray.filter((item) => item !== ev.target.value));
       props.onHandlerCount("REMOVE");
       return;
@@ -56,7 +54,6 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
       return;
     }
   }
-
   return (
     <>
       {numberArray.map((btn) => (

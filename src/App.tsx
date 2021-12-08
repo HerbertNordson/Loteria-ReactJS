@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import { RootStateOrAny, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import "./App.css";
 import Rota from "./services/rotas";
 
 const App = () => {
-  const Auth = useSelector(
-    (state: RootStateOrAny) => state.auth.isAuthenticated
-  );
   const [data, setData] = useState<[{}]>([{}]);
 
   useEffect(() => {
