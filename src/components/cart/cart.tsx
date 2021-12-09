@@ -57,10 +57,8 @@ const Cart: React.FC<IPropCart> = (props) => {
                 )
               )
             )}
-          {!toggleItem && (
-            <p className="CartNull">Seu carrinho está vazio!!!</p>
-          )}
         </div>
+        {!toggleItem && <p className="CartNull">Seu carrinho está vazio!!!</p>}
         <h3>
           Cart <span>total: </span>
           {finalPrice > 0
