@@ -11,6 +11,7 @@ interface IPropsNumbers {
   maxRange: number;
   count: number;
   color: string;
+  game: number[];
   onHandlerCount: (props: string) => void;
 }
 
@@ -25,8 +26,8 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
 
   function onButtonClickHandler(ev: any) {
     if (props.count === props.maxRange) {
-      for (let i = 0; i < btnArray.length; i++) {
-        if (ev.target.value === btnArray[i]) {
+      for (let i = 0; i < numberArray.length; i++) {
+        if (+ev.target.value === +props.game[i]) {
           ev.target.removeAttribute("style");
           ev.target.classList.remove("ativo");
           setBtnArray(btnArray.filter((item) => item !== ev.target.value));

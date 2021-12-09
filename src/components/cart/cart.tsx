@@ -9,6 +9,7 @@ import { Card } from "../card/styles";
 import "react-toastify/dist/ReactToastify.css";
 
 import { IPropsBet, IPropsItem } from "./interface";
+import { useEffect, useState } from "react";
 
 interface IPropCart {
   cartItems: any;
@@ -17,9 +18,16 @@ interface IPropCart {
 const Cart: React.FC<IPropCart> = (props) => {
   const dispatch = useDispatch();
   const toggleItem = useSelector((state: IPropsBet) => state.gameBet.itemCart);
+  const [limit, setLimit] = useState<number>(0);
   let finalPrice: number = 0;
 
   const onHandlerSave = () => {
+    if (finalPrice < limit && props.cartItems.length > 0) {
+      toast.warning(
+        `O valor mínimo para salva sua aposta é de: R$${limit},00 reais`
+      );
+      return;
+    }
     if (props.cartItems.length > 0) {
       dispatch(saveCartItems(props.cartItems));
       for (let i = 0; i < props.cartItems.length; i++) {
@@ -30,6 +38,16 @@ const Cart: React.FC<IPropCart> = (props) => {
     }
     toast.error("Você precisa de pelo menos 1 jogo para efetuar sua aposta!");
   };
+
+  useEffect(() => {
+    fetch("./games.json", {
+      headers: {
+        Accept: "aplications/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => setLimit(response["min-cart-value"]));
+  }, []);
 
   return (
     <CartItems>

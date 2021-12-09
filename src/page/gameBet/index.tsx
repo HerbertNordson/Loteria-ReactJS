@@ -106,6 +106,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
               count={count}
               color={color}
               onHandlerCount={countHandler}
+              game={game}
             />
           </div>
           <ButtonsAct

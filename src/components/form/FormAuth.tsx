@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Card } from "..";
 import { Container } from "./styles";
 
@@ -19,12 +20,15 @@ const FormAuth: React.FC<IPropsForm> = (props) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>();
 
-  const submitHandler = () => {
+  const submitHandler = (ev: any) => {
+    ev.preventDefault();
     Users.map((item: any) => {
       if (item.email === email && item.senha === password) {
         props.onLogin(item.email);
       } else {
-        alert("Email ou Senha incorreto!");
+        toast.warning("Email ou Senha incorreto!", {
+          autoClose: 8000,
+        });
       }
     });
   };

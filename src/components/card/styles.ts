@@ -10,6 +10,6 @@ export const Card = styled.div`
   & .games {
     width: 95%;
     max-height: 20em;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 `;
