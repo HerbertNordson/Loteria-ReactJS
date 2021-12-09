@@ -20,7 +20,7 @@ const ButtonsAct: React.FC<IPropsACT> = (props) => {
   };
 
   const itemHandleRandom = () => {
-    let min: number, max: number, r: number, n: number, p: number;
+    let min: number, max: number, r: number, n: number, p: boolean;
     min = 1;
     max = props.range;
     r = props.maxNumber;

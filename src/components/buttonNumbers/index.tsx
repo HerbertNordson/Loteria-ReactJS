@@ -24,7 +24,7 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
   }
 
   function onButtonClickHandler(ev: any) {
-    if (props.count >= props.maxRange) {
+    if (props.count === props.maxRange) {
       for (let i = 0; i < btnArray.length; i++) {
         if (ev.target.value === btnArray[i]) {
           ev.target.removeAttribute("style");

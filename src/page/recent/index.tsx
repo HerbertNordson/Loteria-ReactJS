@@ -10,10 +10,12 @@ import { useState } from "react";
 
 const RecentGame: React.FC<IProps> = (props) => {
   const cartSave = useSelector((state: ISaveItem) => state.save.itemsSave);
+  const [type, setType] = useState<string | null>("");
   const [filter, setFilter] = useState<[]>(cartSave);
 
   function onFilterItems(props: string | null) {
     let newArr: any = cartSave.filter((item: IGameItem) => item.Type === props);
+    setType(props);
     setFilter(newArr);
   }
 
@@ -26,7 +28,7 @@ const RecentGame: React.FC<IProps> = (props) => {
             <h3>Recent Games</h3>
             <Filters>
               <span>Filters</span>
-              <Button data={props.data} onContent={onFilterItems} />
+              <Button data={props.data} onContent={onFilterItems} name={type} />
             </Filters>
           </div>
           <div className="gamesRecents">

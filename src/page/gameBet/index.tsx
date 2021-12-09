@@ -16,7 +16,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
   const [price, setPrice] = useState<number>(0);
   const [maxNumber, setMaxNumber] = useState<number>(0);
   const [color, setColor] = useState<string>("");
-  const [count, setCount] = useState<number>(1);
+  const [count, setCount] = useState<number>(0);
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state: IPropsState) => state.cart.items);
@@ -37,7 +37,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
 
   const cleanGame = (): void => {
     dispatch(numberActions.handlerRemoveArrNumbers());
-    setCount(1);
+    setCount(0);
     setRange(0);
   };
 
@@ -53,6 +53,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
       );
       return;
     }
+
     dispatch(
       cartActcion.addItemToCart({
         game,
