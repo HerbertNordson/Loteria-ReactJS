@@ -13,6 +13,10 @@ const numberSlice = createSlice({
       const newNumb: number = action.payload;
       state.numberArr.push(newNumb);
     },
+    handlerRemoveItemArrNumbers(state: INumber, action) {
+      const newNumb: number = action.payload;
+      state.numberArr.splice(state.numberArr.indexOf(newNumb), 1);
+    },
     handlerRemoveArrNumbers(state) {
       while (state.numberArr.length) {
         state.numberArr.pop();

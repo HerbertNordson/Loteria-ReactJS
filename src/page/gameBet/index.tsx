@@ -74,6 +74,7 @@ const GameBet: React.FC<IPropsData> = (props) => {
       toast.warning(`Não é possível efetuar jogos em duplicidade!`);
       return;
     }
+
     dispatch(
       cartActcion.addItemToCart({
         game,

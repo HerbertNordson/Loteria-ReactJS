@@ -31,6 +31,7 @@ const ButtonNumber: React.FC<IPropsNumbers> = (props) => {
           ev.target.removeAttribute("style");
           ev.target.classList.remove("ativo");
           setBtnArray(btnArray.filter((item) => item !== ev.target.value));
+          dispatch(numberActions.handlerRemoveItemArrNumbers(+ev.target.value));
           props.onHandlerCount("REMOVE");
           return;
         }

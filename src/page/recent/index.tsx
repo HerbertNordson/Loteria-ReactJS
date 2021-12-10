@@ -11,10 +11,27 @@ import { useState } from "react";
 const RecentGame: React.FC<IProps> = (props) => {
   const cartSave = useSelector((state: ISaveItem) => state.save.itemsSave);
   const [type, setType] = useState<string | null>("");
-  const [filter, setFilter] = useState<[]>(cartSave);
+  const [filter, setFilter] = useState<any[]>(cartSave);
+  const [typeArr, setTypeArr] = useState<any>([]);
 
   function onFilterItems(props: string | null) {
-    let newArr: any = cartSave.filter((item: IGameItem) => item.Type === props);
+    let newArr: any[] = [];
+    setTypeArr([...typeArr].concat(props));
+    console.log(typeArr);
+
+    for (let i = 0; i < typeArr.length; i++) {
+      if (type !== props) {
+        console.log("if");
+        let novo = cartSave.filter(
+          (item: IGameItem) => item.Type === typeArr[i]
+        );
+        newArr = [...filter].concat(novo);
+      } else {
+        console.log("else");
+        newArr = cartSave.filter((item: IGameItem) => item.Type !== props);
+      }
+    }
+
     setType(props);
     setFilter(newArr);
   }
@@ -32,7 +49,7 @@ const RecentGame: React.FC<IProps> = (props) => {
             </Filters>
           </div>
           <div className="gamesRecents">
-            {filter.length === 0 && (
+            {filter?.length === 0 && (
               <p>Você não fez nenhum jogo recentemente!</p>
             )}
             {filter?.map((item: IGameItem) => (
