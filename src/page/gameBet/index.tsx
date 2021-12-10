@@ -8,6 +8,7 @@ import { Button, ButtonsAct, Header, ButtonNumber, Cart } from "@components";
 import { toast } from "react-toastify";
 import { TypesCenter, TypesContent } from "./styles";
 import { IContent, IGame, IPropsData, IPropsState } from "./interfaces";
+import { CartItems } from "components/cart/styles";
 
 const GameBet: React.FC<IPropsData> = (props) => {
   const [type, setType] = useState<string | null>("Lotofácil");
@@ -54,6 +55,25 @@ const GameBet: React.FC<IPropsData> = (props) => {
       return;
     }
 
+    let Arr: number[] = [];
+    game.map((item: number) => {
+      for (let i = 0; i < game.length; i++) {
+        for (let l = 0; l < game.length; l++) {
+          cartItems.map((item: any) => {
+            if (item.itemGame[l] === game[i]) {
+              Arr.push(game[i]);
+            }
+          });
+        }
+      }
+    });
+
+    let news = Arr.sort((a: number, b: number) => a - b);
+    let newGame = news.filter((item, i) => news.indexOf(item) === i);
+    if (newGame.toString() === game.toString()) {
+      toast.warning(`Não é possível efetuar jogos em duplicidade!`);
+      return;
+    }
     dispatch(
       cartActcion.addItemToCart({
         game,
