@@ -1,15 +1,9 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Card } from "..";
 import { Container } from "./styles";
-
-const Users = [
-  {
-    email: "herbert@admin.com",
-    senha: "admin123",
-  },
-];
 
 interface IPropsForm {
   onLogin: (props: string) => void;
@@ -18,19 +12,46 @@ interface IPropsForm {
 
 const FormAuth: React.FC<IPropsForm> = (props) => {
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>();
+  const [password, setPassword] = useState<string>("");
+  const Users = useSelector((state: any) => state.auth.user);
 
   const submitHandler = (ev: any) => {
     ev.preventDefault();
-    Users.map((item: any) => {
-      if (item.email === email && item.senha === password) {
-        props.onLogin(item.email);
+
+    if (email.length === 0 && password.length === 0) {
+      toast.warning("Por favor, preencha os campos de Email e Senha!", {
+        autoClose: 8000,
+      });
+      return;
+    } else if (email.length > 0 && password.length === 0) {
+      toast.warning(
+        "Por favor, preencha o campo de Senha para efetuar Login!",
+        {
+          autoClose: 8000,
+        }
+      );
+      return;
+    } else if (email.length === 0 && password.length > 0) {
+      toast.warning(
+        "Por favor, preencha o campo de Senha para efetuar o Login",
+        {
+          autoClose: 8000,
+        }
+      );
+      return;
+    }
+
+    for (let i = 0; i < Users.length; i++) {
+      if (Users[i].email === email && Users[i].password === password) {
+        props.onLogin(Users[i].email);
+        return;
       } else {
         toast.warning("Email ou Senha incorreto!", {
           autoClose: 8000,
         });
+        return;
       }
-    });
+    }
   };
 
   function handleEmail(ev: any) {

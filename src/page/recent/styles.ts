@@ -10,6 +10,7 @@ export const Content = styled.main`
     font-weight: bold;
     font-size: 1.5em;
     margin-top: 1.5em;
+    height: 1.5em;
   }
   & p {
     margin: auto;
