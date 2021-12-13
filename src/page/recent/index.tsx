@@ -17,7 +17,6 @@ const RecentGame: React.FC<IProps> = (props) => {
   function onFilterItems(props: string | null) {
     let newArr: any[] = [];
     setTypeArr([...typeArr].concat(props));
-    console.log(typeArr);
 
     for (let i = 0; i < typeArr.length; i++) {
       if (type !== props) {

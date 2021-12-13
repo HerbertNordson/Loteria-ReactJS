@@ -20,9 +20,7 @@ const FormResgiter: React.FC<IPropsForm> = (props) => {
   function onHandlerSubmit(ev: any) {
     ev.preventDefault();
     dispatch(authActions.register({ login, email, password }));
-    toast.warning("Cadastro efetuado com sucesso!", {
-      autoClose: 8000,
-    });
+    toast.warning("Cadastro efetuado com sucesso!");
     navigate("/");
   }
 

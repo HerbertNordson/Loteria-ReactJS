@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <ToastContainer />
+      <ToastContainer autoClose={8000} />
       <BrowserRouter>
         <Rota data={data} />
       </BrowserRouter>

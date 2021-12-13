@@ -19,24 +19,14 @@ const FormAuth: React.FC<IPropsForm> = (props) => {
     ev.preventDefault();
 
     if (email.length === 0 && password.length === 0) {
-      toast.warning("Por favor, preencha os campos de Email e Senha!", {
-        autoClose: 8000,
-      });
+      toast.warning("Por favor, preencha os campos de Email e Senha!");
       return;
     } else if (email.length > 0 && password.length === 0) {
-      toast.warning(
-        "Por favor, preencha o campo de Senha para efetuar Login!",
-        {
-          autoClose: 8000,
-        }
-      );
+      toast.warning("Por favor, preencha o campo de Senha para efetuar Login!");
       return;
     } else if (email.length === 0 && password.length > 0) {
       toast.warning(
-        "Por favor, preencha o campo de Senha para efetuar o Login",
-        {
-          autoClose: 8000,
-        }
+        "Por favor, preencha o campo de Senha para efetuar o Login"
       );
       return;
     }
@@ -46,9 +36,7 @@ const FormAuth: React.FC<IPropsForm> = (props) => {
         props.onLogin(Users[i].email);
         return;
       } else {
-        toast.warning("Email ou Senha incorreto!", {
-          autoClose: 8000,
-        });
+        toast.warning("Email ou Senha incorreto!");
         return;
       }
     }
