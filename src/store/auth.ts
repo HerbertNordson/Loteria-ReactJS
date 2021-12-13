@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 
 export interface IUser {
   isAuthenticated: boolean;

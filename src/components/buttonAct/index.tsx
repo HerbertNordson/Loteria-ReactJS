@@ -69,8 +69,12 @@ const ButtonsAct: React.FC<IPropsACT> = (props) => {
   return (
     <Act>
       <div>
-        <button onClick={itemHandleRandom}>Complete game</button>
-        <button onClick={onHandlerClean}>Clear game</button>
+        <button onClick={itemHandleRandom} className="random">
+          Complete game
+        </button>
+        <button onClick={onHandlerClean} className="clean">
+          Clear game
+        </button>
       </div>
       <button className="add" onClick={itemHandleCart}>
         Add to cart

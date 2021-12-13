@@ -19,7 +19,7 @@ const RecentGame: React.FC<IProps> = (props) => {
       setFilter(newArr);
       return;
     }
-  }, [type]);
+  }, [type, cartSave]);
 
   function onFilterItems(props: string | null) {
     let newArr: any[] = [];
@@ -80,7 +80,10 @@ const RecentGame: React.FC<IProps> = (props) => {
           </div>
         </Center>
 
-        <Link to="/game"> {"New bet ->"} </Link>
+        <Link to="/game" className="newBet">
+          {" "}
+          {"New bet ->"}{" "}
+        </Link>
       </Content>
     </>
   );

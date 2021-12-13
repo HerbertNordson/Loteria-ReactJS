@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { cartActcion, numberActions, betActions } from "@reduxStore";
+import { cartActcion, numberActions } from "@reduxStore";
 
 import { Button, ButtonsAct, Header, ButtonNumber, Cart } from "@components";
 
 import { toast } from "react-toastify";
 import { TypesCenter, TypesContent } from "./styles";
 import { IContent, IGame, IPropsData, IPropsState } from "./interfaces";
-import { CartItems } from "components/cart/styles";
 
 const GameBet: React.FC<IPropsData> = (props) => {
   const [type, setType] = useState<string | null>("Lotofácil");
@@ -91,10 +90,13 @@ const GameBet: React.FC<IPropsData> = (props) => {
   const countHandler = (props: string): void => {
     if (props === "REMOVE") {
       setCount(count - 1);
+      return;
     } else if (props === "ADD") {
       setCount(count + 1);
+      return;
     } else if (props === "ALL") {
       setCount(maxNumber);
+      return;
     }
   };
 
