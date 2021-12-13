@@ -47,11 +47,13 @@ const FormResgiter: React.FC<IPropsForm> = (props) => {
           return;
         }
       });
-      return;
     }
     dispatch(authActions.register({ login, email, password }));
     toast.success("Cadastro efetuado com sucesso!");
-    navigate("/");
+    setEmail("");
+    setLogin("");
+    setPassword("");
+    onHandlerFormType();
   }
 
   function handleLogin(ev: any) {

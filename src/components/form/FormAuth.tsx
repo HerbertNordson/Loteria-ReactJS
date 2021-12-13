@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,7 +13,16 @@ interface IPropsForm {
 const FormAuth: React.FC<IPropsForm> = (props) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [err, setErr] = useState<boolean>(true);
   const Users = useSelector((state: any) => state.auth.user);
+
+  useEffect(() => {
+    if (!err) {
+      toast.warning("Email ou Senha incorreto!");
+    } else {
+      return;
+    }
+  }, [err]);
 
   const submitHandler = (ev: any) => {
     ev.preventDefault();
@@ -30,16 +39,15 @@ const FormAuth: React.FC<IPropsForm> = (props) => {
       );
       return;
     }
-
-    for (let i = 0; i < Users.length; i++) {
-      if (Users[i].email === email && Users[i].password === password) {
-        props.onLogin(Users[i].email);
+    Users.map((item: any) => {
+      if (item.email === email && item.password === password) {
+        setErr(true);
+        props.onLogin(item.email);
         return;
       } else {
-        toast.warning("Email ou Senha incorreto!");
-        return;
+        setErr(false);
       }
-    }
+    });
   };
 
   function handleEmail(ev: any) {
