@@ -3,9 +3,9 @@ import { IItemMap, IProps } from "./interface";
 import { ButtonType } from "./styles";
 
 const ButtonFilter: React.FC<IProps> = (props) => {
-  function getNameHandler(ev: React.MouseEvent) {
+  function getNameHandler(ev: any) {
     ev.preventDefault();
-    props.onContent(ev.currentTarget.textContent);
+    props.onContent(ev.target.value);
   }
 
   return (
@@ -21,6 +21,7 @@ const ButtonFilter: React.FC<IProps> = (props) => {
               color: item.type === props.name ? "#fff" : item.color,
             }}
             key={item.type}
+            value={item.type}
           >
             {item.type}
           </ButtonType>

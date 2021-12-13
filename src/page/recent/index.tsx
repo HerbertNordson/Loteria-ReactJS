@@ -6,32 +6,43 @@ import { GameRecent, Button, Header } from "@components";
 import { IGameItem, ISaveItem } from "./interface";
 import { IProps } from "../../services/interface";
 import { Center, Content, Filters } from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const RecentGame: React.FC<IProps> = (props) => {
   const cartSave = useSelector((state: ISaveItem) => state.save.itemsSave);
-  const [type, setType] = useState<string | null>("");
   const [filter, setFilter] = useState<any[]>(cartSave);
-  const [typeArr, setTypeArr] = useState<any>([]);
+  const [type, setType] = useState<string | null>();
+
+  useEffect(() => {
+    if (type === "") {
+      let newArr = cartSave.filter((item: IGameItem) => item.Type);
+      setFilter(newArr);
+      return;
+    }
+  }, [type]);
 
   function onFilterItems(props: string | null) {
     let newArr: any[] = [];
-    setTypeArr([...typeArr].concat(props));
 
-    for (let i = 0; i < typeArr.length; i++) {
-      if (type !== props) {
-        console.log("if");
-        let novo = cartSave.filter(
-          (item: IGameItem) => item.Type === typeArr[i]
-        );
-        newArr = [...filter].concat(novo);
-      } else {
-        console.log("else");
-        newArr = cartSave.filter((item: IGameItem) => item.Type !== props);
-      }
+    if (type === props) {
+      newArr = filter.filter((item: IGameItem) => item.Type !== type);
+      setType("");
+      setFilter(newArr);
+      return;
     }
-
+    if (type !== props) {
+      newArr = cartSave.filter((item: IGameItem) => item.Type === props);
+      setType(props);
+      setFilter(newArr);
+      return;
+    }
     setType(props);
+    setFilter(newArr);
+  }
+
+  function onAllGame() {
+    let newArr = cartSave.filter((item: IGameItem) => item.Type);
+    setType("");
     setFilter(newArr);
   }
 
@@ -41,7 +52,7 @@ const RecentGame: React.FC<IProps> = (props) => {
       <Content>
         <Center>
           <div>
-            <h3>Recent Games</h3>
+            <h3 onClick={onAllGame}>Recent Games</h3>
             <Filters>
               <span>Filters</span>
               <Button data={props.data} onContent={onFilterItems} name={type} />

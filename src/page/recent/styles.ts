@@ -50,6 +50,7 @@ export const Center = styled.section`
   & h3 {
     text-transform: uppercase;
     font-size: 1.5rem;
+    cursor: pointer;
   }
 
   .gamesRecents {
