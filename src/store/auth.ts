@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-interface IUser {
+export interface IUser {
   isAuthenticated: boolean;
   user: object[];
   actualUser: object[];

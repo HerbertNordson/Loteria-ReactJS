@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authActions } from "store";
+import { IUser } from "store/auth";
 import { Card } from "..";
 import { Container } from "./styles";
 
@@ -10,17 +11,46 @@ interface IPropsForm {
   onType: (props: string) => void;
 }
 
+interface IUserBD {
+  auth: {
+    isAuthenticated: boolean;
+    user: object[];
+    actualUser: object[];
+  };
+}
+
 const FormResgiter: React.FC<IPropsForm> = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [login, setLogin] = useState<string>();
+  const [login, setLogin] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>();
+  const [password, setPassword] = useState<string>("");
+  const users = useSelector((state: IUserBD) => state.auth.user);
 
   function onHandlerSubmit(ev: any) {
     ev.preventDefault();
+    if (password.length < 8) {
+      toast.warning("A senha precisa conter pelo menos 8 caracters!");
+      return;
+    }
+    if (login.length < 3) {
+      toast.warning("Insira um nome com pelo menos 3 caracters!");
+      return;
+    }
+    if (email.length === 0) {
+      toast.warning("Insira um endereço de e-mail para concluir o cadastro!");
+      return;
+    } else if (email.length > 0) {
+      users.map((item: any) => {
+        if (item.email === email) {
+          toast.warning("E-mail já cadastrado! Insira um novo e-mail válido.");
+          return;
+        }
+      });
+      return;
+    }
     dispatch(authActions.register({ login, email, password }));
-    toast.warning("Cadastro efetuado com sucesso!");
+    toast.success("Cadastro efetuado com sucesso!");
     navigate("/");
   }
 
