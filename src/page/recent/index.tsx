@@ -80,7 +80,7 @@ const RecentGame: React.FC<IProps> = (props) => {
           </div>
         </Center>
 
-        <Link to="/game" className="newBet">
+        <Link className="newBet" to="/game">
           {" "}
           {"New bet ->"}{" "}
         </Link>

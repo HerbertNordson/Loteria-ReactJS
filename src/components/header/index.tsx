@@ -17,7 +17,9 @@ const Header = () => {
         <Link to="/home" className="TGL">
           TGL
         </Link>
-        <Link to="/home">Home</Link>
+        <Link to="/home" className="home">
+          Home
+        </Link>
       </div>
       <div className="menu">
         <Link to="/account">Account</Link>

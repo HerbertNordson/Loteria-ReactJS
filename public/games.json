@@ -1,5 +1,5 @@
 {
-  "min-cart-value": 30,
+  "min-cart-value": 2.5,
   "types": [
     {
       "type": "Lotofácil",

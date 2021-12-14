@@ -86,7 +86,7 @@ const Cart: React.FC<IPropCart> = (props) => {
               })
             : "R$ 0,00"}
         </h3>
-        <button type="button" onClick={onHandlerSave}>
+        <button type="button" onClick={onHandlerSave} className="save">
           Save
         </button>
       </Card>

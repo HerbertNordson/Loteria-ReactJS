@@ -22,6 +22,7 @@ const ButtonFilter: React.FC<IProps> = (props) => {
             }}
             key={item.type}
             value={item.type}
+            className={item.type}
           >
             {item.type}
           </ButtonType>
